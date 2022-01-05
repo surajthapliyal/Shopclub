@@ -35,19 +35,21 @@ const NavBar = ({ totalItems }) => {
             Shopclub
           </Typography>
           <div className={classes.grow}></div>
-          <div className={classes.button}>
-            <IconButton
-              component={Link}
-              to="/cart"
-              aria-label="Show Cart Items"
-              color="inherit"
-            >
-              {/* badgeContent is no. of items in the cart */}
-              <Badge badgeContent={totalItems} color="secondary">
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
-          </div>
+          {location.pathname === "/" && (
+            <div className={classes.button}>
+              <IconButton
+                component={Link}
+                to="/cart"
+                aria-label="Show Cart Items"
+                color="inherit"
+              >
+                {/* badgeContent is no. of items in the cart */}
+                <Badge badgeContent={totalItems} color="secondary">
+                  <ShoppingCart />
+                </Badge>
+              </IconButton>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </>
