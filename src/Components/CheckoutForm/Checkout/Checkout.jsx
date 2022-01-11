@@ -10,7 +10,7 @@ import {
   Divider,
   Button,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { commerce } from "../../../lib/commerce";
 import AddressForm from "../AddressForm";
@@ -23,8 +23,9 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
   const [shippingData, setShippingData] = useState({});
+  const [isFinished, setIsFinished] = useState(false);
   const classes = useStyles();
-  // const history = useHistory();
+  const history = useNavigate();
 
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -47,6 +48,17 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
           <Typography variant="subtitle2">
             Order ref: {order.customer_reference}
           </Typography>
+        </div>
+        <br />
+        <Button component={Link} variant="outlined" type="button" to="/">
+          Back to home
+        </Button>
+      </>
+    ) : isFinished ? (
+      <>
+        <div>
+          <Typography variant="h5">Thank you for your purchase !</Typography>
+          <Divider className={classes.divider} />
         </div>
         <br />
         <Button component={Link} variant="outlined" type="button" to="/">
@@ -86,9 +98,14 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
         backStep={backStep}
         shippingData={shippingData}
         onCaptureCheckout={onCaptureCheckout}
+        timeOut={timeOut}
       />
     );
-
+  const timeOut = () => {
+    setTimeout(() => {
+      setIsFinished(true);
+    }, 2000);
+  };
   useEffect(() => {
     if (cart.id) {
       const generateToken = async () => {
@@ -99,7 +116,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 
           setCheckoutToken(token);
         } catch {
-          // if (activeStep !== steps.length) history.push("/");
+          history.pushState("/");
         }
       };
 
