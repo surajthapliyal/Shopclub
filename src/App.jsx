@@ -8,7 +8,7 @@ import Checkout from "./Components/CheckoutForm/Checkout/Checkout";
 import Cart from "./Components/Cart/Cart";
 import { commerce } from "./lib/commerce";
 
-require("dotenv").config();
+// require("dotenv").config();
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
