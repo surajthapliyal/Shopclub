@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { CssBaseline } from "@material-ui/core";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import NavBar from "./Components/NavBar/NavBar"
-import Products from "./Components/Products/Products"
-import Checkout from "./Components/CheckoutForm/Checkout/Checkout"
-import Cart from "./Components/Cart/Cart"
+import NavBar from "./Components/NavBar/NavBar";
+import Products from "./Components/Products/Products";
+import Checkout from "./Components/CheckoutForm/Checkout/Checkout";
+import Cart from "./Components/Cart/Cart";
 import { commerce } from "./lib/commerce";
+
+require("dotenv").config();
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -108,7 +110,9 @@ const App = () => {
           <Route
             exact
             path="/checkout"
-            element={<Checkout cart={cart} onCaptureCheckout ={handleCaptureCheckout}/>}
+            element={
+              <Checkout cart={cart} onCaptureCheckout={handleCaptureCheckout} />
+            }
           />
         </Routes>
       </div>
