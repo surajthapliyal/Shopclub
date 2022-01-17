@@ -26,7 +26,7 @@ const App = () => {
     localStorage.setItem("loginData", JSON.stringify(googleData.profileObj));
   };
   const handleFailure = (result) => {
-    alert(result);
+    alert("error = ", result);
   };
   const handleLogout = () => {
     localStorage.removeItem("loginData");

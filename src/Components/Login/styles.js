@@ -15,9 +15,19 @@ export default makeStyles((theme) => ({
             marginLeft: "auto",
             marginRight: "auto",
         },
-        textAlign:"center",
-        fontFamily:"TrebuchetMS"
+        textAlign: "center",
     },
+    heading: {
+        textShadow: "1px 1px 5px red",
+        fontSize: "8.3vw",
+        margin: "auto"
+    },
+    googleButton: {
+        margin: "auto",
+        width: "auto",
+        marginTop: "35px"
+    },
+    subheading: { textShadow: "1px 1px 2px pink" },
     paper: {
         marginTop: theme.spacing(3),
         marginBottom: theme.spacing(3),
