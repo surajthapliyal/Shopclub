@@ -6,9 +6,8 @@ import NavBar from "./Components/NavBar/NavBar";
 import Products from "./Components/Products/Products";
 import Checkout from "./Components/CheckoutForm/Checkout/Checkout";
 import Cart from "./Components/Cart/Cart";
+import Login from "./Components/Login/Login";
 import { commerce } from "./lib/commerce";
-
-// require("dotenv").config();
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -16,7 +15,23 @@ const App = () => {
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [loginData, setLoginData] = useState(
+    localStorage.getItem("loginData")
+      ? JSON.parse(localStorage.getItem("loginData"))
+      : null
+  );
+  const handleLogin = async (googleData) => {
+    console.log(googleData.profileObj);
+    setLoginData(googleData.profileObj);
+    localStorage.setItem("loginData", JSON.stringify(googleData.profileObj));
+  };
+  const handleFailure = (result) => {
+    alert(result);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("loginData");
+    setLoginData(null);
+  };
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
 
@@ -81,41 +96,49 @@ const App = () => {
 
   return (
     <Router>
-      <div style={{ display: "flex" }}>
-        <CssBaseline />
-        <NavBar
-          totalItems={cart.total_items}
-          handleDrawerToggle={handleDrawerToggle}
-        />
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <Products products={products} onAddToCart={handleAddToCart} />
-            }
+      {loginData ? (
+        <div style={{ display: "flex" }}>
+          <CssBaseline />
+          <NavBar
+            handleLogout={handleLogout}
+            totalItems={cart.total_items}
+            handleDrawerToggle={handleDrawerToggle}
           />
-          <Route
-            exact
-            path="/cart"
-            element={
-              <Cart
-                cart={cart}
-                handleUpdateCartQty={handleUpdateCartQty}
-                handleRemoveFromCart={handleRemoveFromCart}
-                handleEmptyCart={handleEmptyCart}
-              />
-            }
-          />
-          <Route
-            exact
-            path="/checkout"
-            element={
-              <Checkout cart={cart} onCaptureCheckout={handleCaptureCheckout} />
-            }
-          />
-        </Routes>
-      </div>
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <Products products={products} onAddToCart={handleAddToCart} />
+              }
+            />
+            <Route
+              exact
+              path="/cart"
+              element={
+                <Cart
+                  cart={cart}
+                  handleUpdateCartQty={handleUpdateCartQty}
+                  handleRemoveFromCart={handleRemoveFromCart}
+                  handleEmptyCart={handleEmptyCart}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/checkout"
+              element={
+                <Checkout
+                  cart={cart}
+                  onCaptureCheckout={handleCaptureCheckout}
+                />
+              }
+            />
+          </Routes>
+        </div>
+      ) : (
+        <Login handleLogin={handleLogin} handleFailure={handleFailure} />
+      )}
     </Router>
   );
 };

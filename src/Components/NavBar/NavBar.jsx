@@ -9,12 +9,13 @@ import {
   Typography,
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useLocation } from "react-router-dom";
 
 import logo from "../../Assets/logo.png";
 import useStyles from "./styles";
 
-const PrimarySearchAppBar = ({ totalItems }) => {
+const PrimarySearchAppBar = ({ totalItems, handleLogout }) => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const classes = useStyles();
   const location = useLocation();
@@ -67,7 +68,7 @@ const PrimarySearchAppBar = ({ totalItems }) => {
               alt="commerce.js"
               height="25px"
               className={classes.image}
-            />{" "}
+            />
             Shopclub
           </Typography>
           <div className={classes.grow} />
@@ -83,6 +84,7 @@ const PrimarySearchAppBar = ({ totalItems }) => {
                   <ShoppingCart />
                 </Badge>
               </IconButton>
+              <IconButton color="secondary" aria-label="Logout" onClick={handleLogout}><LogoutIcon /></IconButton>
             </div>
           )}
         </Toolbar>
