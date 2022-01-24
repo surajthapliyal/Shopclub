@@ -8,6 +8,7 @@ import Checkout from "./Components/CheckoutForm/Checkout/Checkout";
 import Cart from "./Components/Cart/Cart";
 import Login from "./Components/Login/Login";
 import { commerce } from "./lib/commerce";
+import Footer from './Footer';
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -15,6 +16,7 @@ const App = () => {
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
+  const [open, setOpen] = useState(false);
   const [loginData, setLoginData] = useState(
     localStorage.getItem("loginData")
       ? JSON.parse(localStorage.getItem("loginData"))
@@ -103,13 +105,14 @@ const App = () => {
             handleLogout={handleLogout}
             totalItems={cart.total_items}
             handleDrawerToggle={handleDrawerToggle}
+            setOpen={setOpen}
           />
           <Routes>
             <Route
               exact
               path="/"
               element={
-                <Products products={products} onAddToCart={handleAddToCart} />
+                <Products products={products} onAddToCart={handleAddToCart} open={open} setOpen={setOpen} />
               }
             />
             <Route
@@ -139,6 +142,7 @@ const App = () => {
       ) : (
         <Login handleLogin={handleLogin} handleFailure={handleFailure} />
       )}
+      {loginData && <Footer />}
     </Router>
   );
 };

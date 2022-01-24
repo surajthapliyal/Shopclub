@@ -32,7 +32,7 @@ const Product = ({ product, onAddToCart }) => {
         <Typography
           dangerouslySetInnerHTML={{ __html: product.description }}
           variant="body2"
-          color="textSecondary"
+          color="inherit"
         />
       </CardContent>
       <CardActions disabledSpacing className={classes.cardActions}>

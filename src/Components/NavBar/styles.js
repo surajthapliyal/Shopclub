@@ -3,6 +3,7 @@ import { makeStyles, alpha } from "@material-ui/core/styles";
 const drawerWidth = 0;
 
 export default makeStyles((theme) => ({
+  toolbar: theme.mixins.toolbar,
   appBar: {
     boxShadow: "none",
     borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
@@ -10,7 +11,11 @@ export default makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
+    backgroundColor: "black",
+    opacity: "0.93",
+    // height: "50px"
   },
+
   title: {
     flexGrow: 1,
     alignItems: "center",
@@ -30,7 +35,6 @@ export default makeStyles((theme) => ({
     flexGrow: 1,
   },
   search: {
-    position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
@@ -46,7 +50,7 @@ export default makeStyles((theme) => ({
   searchIcon: {
     padding: theme.spacing(0, 2),
     height: "100%",
-    position: "absolute",
+    // position: "absolute",
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
@@ -65,4 +69,11 @@ export default makeStyles((theme) => ({
       width: "20ch",
     },
   },
+  logo: {
+    fontSize: "200%",
+    fontFamily: "Helvetica",
+    letterSpacing: "-.06em",
+    color: "white",
+    fontWeight: "600",
+  }
 }));

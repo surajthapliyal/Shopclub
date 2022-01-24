@@ -1,56 +1,55 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, createTheme } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
     appBar: {
         position: "relative",
     },
-    toolbar: theme.mixins.toolbar,
+    container: {
+        backgroundImage: 'url("Assets/mainBG.jpg")',
+        backgroundSize: "cover",
+        height: "100vh",
+        margin: "0",
+        padding: "0",
+    },
     layout: {
-        marginTop: "8%",
-        width: "auto",
-        marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2),
-        [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-            width: 600,
-            marginLeft: "auto",
-            marginRight: "auto",
-        },
         textAlign: "center",
     },
     heading: {
-        textShadow: "1px 1px 5px red",
+        color: "white",
         fontSize: "8.3vw",
-        margin: "auto"
+        fontFamily: "Helvetica",
+        letterSpacing: "-.09em",
     },
     googleButton: {
-        margin: "auto",
-        width: "auto",
-        marginTop: "35px"
+        fontFamily: "Helvetica",
+        marginTop: "10px",
+        padding: "15px 25px",
+        fontSize: "15px",
+        background: "none",
+        border: "none",
+        outline: "none",
+        cursor: "pointer",
+        backgroundColor: "white",
+        borderRadius: "50px"
     },
-    subheading: { textShadow: "1px 1px 2px pink" },
-    paper: {
-        marginTop: theme.spacing(3),
-        marginBottom: theme.spacing(3),
-        padding: theme.spacing(2),
-        [theme.breakpoints.down("xs")]: {
-            width: "100%",
-            marginTop: 60,
-        },
-        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-            marginTop: theme.spacing(6),
-            marginBottom: theme.spacing(6),
-            padding: theme.spacing(3),
-        },
+    headingBox: {
+        position: "fixed",
+        top: "80px",
+        left: "60px"
+        // padding: "8rem calc((110vw - 1400px) / 2)",
     },
-    buttons: {
-        display: "flex",
-        justifyContent: "flex-end",
+    tagline: {
+        color: "white",
+        fontFamily: "Helvetica",
+        marginTop: "5px",
+        fontSize: "1.5vw",
+        letterSpacing: "-.05em",
     },
-    button: {
-        marginTop: theme.spacing(3),
-        marginLeft: theme.spacing(1),
+    subheading: {
+        color: "white",
+        fontSize: "3.0vw",
+        marginTop: "-10px",
+        fontFamily: "Helvetica",
+        letterSpacing: "-.07em",
     },
-    divider: {
-        margin: "20px 0",
-    }
 }));

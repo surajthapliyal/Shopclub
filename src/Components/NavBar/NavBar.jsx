@@ -7,6 +7,7 @@ import {
   MenuItem,
   Menu,
   Typography,
+  Button,
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -15,7 +16,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../Assets/logo.png";
 import useStyles from "./styles";
 
-const PrimarySearchAppBar = ({ totalItems, handleLogout }) => {
+const PrimarySearchAppBar = ({ totalItems, handleLogout, setOpen }) => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const classes = useStyles();
   const location = useLocation();
@@ -54,42 +55,45 @@ const PrimarySearchAppBar = ({ totalItems, handleLogout }) => {
 
   return (
     <>
-      <AppBar position="fixed" className={classes.appBar} color="inherit">
-        <Toolbar>
-          <Typography
-            component={Link}
-            to="/"
-            variant="h6"
-            className={classes.title}
-            color="inherit"
-          >
-            <img
-              src={logo}
-              alt="commerce.js"
-              height="25px"
-              className={classes.image}
-            />
-            Shopclub
-          </Typography>
+      <AppBar position="absolute" className={classes.appBar} color="inherit" >
+        <Toolbar >
+          <div onClick={() => setOpen(false)} className={classes.title}>
+            <Link to="/" style={{
+              textDecoration: "none", alignItems: "center",
+              display: "flex",
+            }}>
+              <img
+                src={logo}
+                alt="commerce.js"
+                height="35px"
+                className={classes.image}
+              />
+              <span className={classes.logo}>Shopclub</span>
+            </Link>
+          </div>
           <div className={classes.grow} />
           {location.pathname === "/" && (
-            <div className={classes.button}>
-              <IconButton
-                component={Link}
-                to="/cart"
-                aria-label="Show cart items"
-                color="inherit"
-              >
-                <Badge badgeContent={totalItems} color="secondary">
-                  <ShoppingCart />
-                </Badge>
-              </IconButton>
-              <IconButton color="secondary" aria-label="Logout" onClick={handleLogout}><LogoutIcon /></IconButton>
+            <div style={{ display: "flex" }}>
+              <Button style={{ width: "auto" }}>
+                <Typography variant="h6" style={{ color: "white", fontSize: "1.2vw" }} onClick={() => setOpen((prev) => !prev)}>Categories</Typography>
+              </Button>
+              <div className={classes.button}>
+                <IconButton
+                  component={Link}
+                  to="/cart"
+                  aria-label="Show cart items"
+                  color="inherit"
+                >
+                  <Badge badgeContent={totalItems} color="secondary">
+                    <ShoppingCart style={{ color: "white" }} />
+                  </Badge>
+                </IconButton>
+              </div>
             </div>
           )}
+          <IconButton style={{ color: "white" }} aria-label="Logout" onClick={handleLogout}><LogoutIcon /></IconButton>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
     </>
   );
 };

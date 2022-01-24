@@ -22,8 +22,12 @@ export default makeStyles((theme) => ({
   },
   cardDetails: {
     display: "flex",
-    marginTop: "12%",
+    marginTop: "10%",
+    marginBottom: "5%",
     width: "100%",
     justifyContent: "space-between",
   },
+  emptyCart: {
+    height: "100vh"
+  }
 }));

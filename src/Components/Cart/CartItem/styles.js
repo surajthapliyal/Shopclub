@@ -17,5 +17,8 @@ export default makeStyles(() => ({
   },
   mainCard: {
     // width: "85%",
+    backgroundColor: "#e9ecef",
+    color: "black",
+    margin: "20px"
   },
 }));
