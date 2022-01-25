@@ -11,7 +11,7 @@ export default makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
-    backgroundColor: "black",
+    backgroundColor: "#0b090a",
     opacity: "0.93",
     // height: "50px"
   },

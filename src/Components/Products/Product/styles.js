@@ -4,7 +4,8 @@ export default makeStyles(() => ({
     maxWidth: "80%",
     backgroundColor:"#e9ecef",
     color:"black",
-    margin:"20px"
+    margin:"20px",
+    boxShadow:"2px 5px 20px #ccd5ae"
   },
   media: {
     height: 0,

@@ -5,7 +5,7 @@ import { Box } from '@material-ui/core';
 export default function Footer() {
     return (
         <>
-            <Box style={{ backgroundColor: "black",marginTop:"10px"}}>
+            <Box style={{ backgroundColor: "#0b090a",marginTop:"10px"}}>
                 <Box style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                     <Box style={{ color: "white", paddingTop: "10vh", paddingBottom: "10vh", paddingLeft: "10vh" }}>
                         © Shopclub - Suraj Thapliyal

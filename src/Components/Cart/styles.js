@@ -28,6 +28,6 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
   },
   emptyCart: {
-    height: "100vh"
+    height: "60vh"
   }
 }));

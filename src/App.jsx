@@ -8,13 +8,14 @@ import Checkout from "./Components/CheckoutForm/Checkout/Checkout";
 import Cart from "./Components/Cart/Cart";
 import Login from "./Components/Login/Login";
 import { commerce } from "./lib/commerce";
-import Footer from './Footer';
+import Footer from "./Footer";
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
+  const [productsPerCategory, setProductsPerCategory] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
   const [loginData, setLoginData] = useState(
@@ -35,9 +36,21 @@ const App = () => {
     setLoginData(null);
   };
   const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
-
-    setProducts(data);
+    const { data: products } = await commerce.products.list();
+    const { data: categoriesData } = await commerce.categories.list();
+    const productsPerCategory = categoriesData.reduce((acc, category) => {
+      return [
+        ...acc,
+        {
+          ...category,
+          productsData: products.filter((product) =>
+            product.categories.find((cat) => cat.id === category.id)
+          ),
+        },
+      ];
+    }, []);
+    setProductsPerCategory(productsPerCategory);
+    setProducts(products);
   };
 
   const fetchCart = async () => {
@@ -112,7 +125,13 @@ const App = () => {
               exact
               path="/"
               element={
-                <Products products={products} onAddToCart={handleAddToCart} open={open} setOpen={setOpen} />
+                <Products
+                  products={products}
+                  onAddToCart={handleAddToCart}
+                  open={open}
+                  setOpen={setOpen}
+                  productsPerCategory={productsPerCategory}
+                />
               }
             />
             <Route
