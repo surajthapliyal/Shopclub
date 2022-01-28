@@ -1,8 +1,8 @@
 import React from "react";
-import { Typography, List, ListItem, ListItemText } from "@material-ui/core";
+import { Container, Typography, List, ListItem, ListItemText } from "@material-ui/core";
 
 const Review = ({ checkoutToken }) => (
-  <>
+  <Container style={{ height: "100vh" }}>
     <Typography variant="h6" gutterBottom>
       Order summary
     </Typography>
@@ -25,7 +25,7 @@ const Review = ({ checkoutToken }) => (
         </Typography>
       </ListItem>
     </List>
-  </>
+  </Container>
 );
 
 export default Review;

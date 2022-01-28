@@ -14,18 +14,20 @@ import { Fade } from "react-reveal";
 
 const Products = ({ products, onAddToCart, open, setOpen, productsPerCategory }) => {
   const classes = useStyles();
-
+  console.log("main    =====   ", productsPerCategory)
   const [productsToRender, setProductsToRender] = useState(products);
 
   useEffect(() => { setProductsToRender(products) }, [products])
 
   if (!productsToRender.length) {
     return <main style={{ height: "100vh" }} className={classes.content} onClick={() => setOpen(false)}>
-      <p style={{ color: "black", fontSize: "3vw" }}>Loading... <CircularProgress /></p>
+      <p style={{ width: "auto", height: "70vh",display: "flex", justifyContent: "center", alignItems: "center" }}><CircularProgress color="secondary" /></p>
     </main>
   };
   const updateProductList = (categoryName) => {
+    console.log(categoryName)
     const data = productsPerCategory.filter((item) => item.name === categoryName);
+    console.log(data[0].productsData);
     setProductsToRender(data[0].productsData)
   }
   return (
@@ -57,7 +59,7 @@ const Products = ({ products, onAddToCart, open, setOpen, productsPerCategory })
             </ListItemButton>
 
             {productsPerCategory.map(item => {
-              return <ListItemButton onClick={() => updateProductList(item.name)}>
+              return <ListItemButton key={item.id} onClick={() => updateProductList(item.name)}>
                 <ListItemText
                   className={classes.listItem}
                   primary={item.name}
@@ -71,11 +73,11 @@ const Products = ({ products, onAddToCart, open, setOpen, productsPerCategory })
       <div className={classes.toolbar} />
       <Grid container justify="center" spacing={4}>
         {productsToRender.map((product) => (
-          <Grid key={product.id} item xs={12} sm={6} md={4} lg={4}>
+          <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
             <Product product={product} onAddToCart={onAddToCart} />
           </Grid>
         ))}
-      </Grid>
+      </Grid> 
     </main>
   );
 };
