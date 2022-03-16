@@ -11,9 +11,19 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { CircularProgress } from "@material-ui/core";
 import { Fade } from "react-reveal";
+import { useMainContext } from './../../Contexts/MainContext';
 
-const Products = ({ products, onAddToCart, open, setOpen, productsPerCategory }) => {
+
+const Products = () => {
   const classes = useStyles();
+  const {
+    products,
+    handleAddToCart,
+    handleUpdateCartQty,
+    productsPerCategory,
+    setOpen,
+    open,
+  } = useMainContext();
   console.log("main    =====   ", productsPerCategory)
   const [productsToRender, setProductsToRender] = useState(products);
 
@@ -21,7 +31,7 @@ const Products = ({ products, onAddToCart, open, setOpen, productsPerCategory })
 
   if (!productsToRender.length) {
     return <main style={{ height: "100vh" }} className={classes.content} onClick={() => setOpen(false)}>
-      <p style={{ width: "auto", height: "70vh",display: "flex", justifyContent: "center", alignItems: "center" }}><CircularProgress color="secondary" /></p>
+      <p style={{ width: "auto", height: "70vh", display: "flex", justifyContent: "center", alignItems: "center" }}><CircularProgress color="secondary" /></p>
     </main>
   };
   const updateProductList = (categoryName) => {
@@ -37,7 +47,7 @@ const Products = ({ products, onAddToCart, open, setOpen, productsPerCategory })
           <List
             sx={{
               width: "100%",
-              maxWidth: 360,
+              maxWidth: 460,
               bgcolor: "#f8f9fa",
               boxShadow: "2px 5px 15px #adb5bd",
               position: "absolute",
@@ -74,10 +84,10 @@ const Products = ({ products, onAddToCart, open, setOpen, productsPerCategory })
       <Grid container justify="center" spacing={4}>
         {productsToRender.map((product) => (
           <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
-            <Product product={product} onAddToCart={onAddToCart} />
+            <Product product={product} onAddToCart={handleAddToCart} />
           </Grid>
         ))}
-      </Grid> 
+      </Grid>
     </main>
   );
 };

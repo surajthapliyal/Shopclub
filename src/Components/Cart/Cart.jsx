@@ -3,15 +3,15 @@ import { Container, Typography, Button, Grid } from "@material-ui/core";
 import useStyles from "./styles";
 import CartItem from "./CartItem/CartItem";
 import { Link } from "react-router-dom";
+import { useMainContext } from './../../Contexts/MainContext';
 
-const Cart = ({
-  cart,
-  handleUpdateCartQty,
-  handleRemoveFromCart,
-  handleEmptyCart,
-}) => {
+const Cart = () => {
   const classes = useStyles();
-
+  const { cart,
+    handleUpdateCartQty,
+    handleRemoveFromCart,
+    handleEmptyCart
+  } = useMainContext();
   const EmptyCart = () => (
     <div className={classes.emptyCart}>
       <Typography variant="subtitle1">

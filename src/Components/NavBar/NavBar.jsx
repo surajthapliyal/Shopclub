@@ -11,21 +11,35 @@ import {
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 
 import logo from "../../Assets/logo.png";
 import useStyles from "./styles";
+import { useAuth } from "../../Contexts/AuthContext";
 
-const PrimarySearchAppBar = ({ totalItems, handleLogout, setOpen }) => {
+const PrimarySearchAppBar = ({ totalItems, setOpen }) => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const classes = useStyles();
   const location = useLocation();
-
+  const [error, setError] = useState("")
+  const { logout } = useAuth();
+  const history = useHistory();
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleMobileMenuClose = () => setMobileMoreAnchorEl(null);
 
   const mobileMenuId = "primary-search-account-menu-mobile";
+
+
+  const handleLogout = async () => {
+    setError("");
+    try {
+      await logout();
+      history.push("/login")
+    } catch {
+      setError("Failed to Logout!")
+    }
+  }
 
   const renderMobileMenu = (
     <Menu

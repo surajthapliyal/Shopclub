@@ -10,22 +10,29 @@ import {
   Divider,
   Button,
 } from "@material-ui/core";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { commerce } from "../../../lib/commerce";
 import AddressForm from "../AddressForm";
 import PaymentForm from "../PaymentForm";
 import useStyles from "./styles";
+import { useMainContext } from './../../../Contexts/MainContext';
 
 const steps = ["Shipping address", "Payment details"];
 
-const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
+const Checkout = () => {
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
   const [shippingData, setShippingData] = useState({});
   const [isFinished, setIsFinished] = useState(false);
   const classes = useStyles();
-  const history = useNavigate();
+  const history = useHistory();
+  const { cart,
+    order,
+    handleCaptureCheckout,
+    errorMessage,
+  } = useMainContext();
+
 
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -71,10 +78,10 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
       </div>
     );
 
-  if (error) {
+  if (errorMessage) {
     Confirmation = () => (
       <>
-        <Typography variant="h5">Error: {error}</Typography>
+        <Typography variant="h5">Error: {errorMessage}</Typography>
         <br />
         <Button component={Link} variant="outlined" type="button" to="/">
           Back to home
@@ -97,7 +104,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
         nextStep={nextStep}
         backStep={backStep}
         shippingData={shippingData}
-        onCaptureCheckout={onCaptureCheckout}
+        onCaptureCheckout={handleCaptureCheckout}
         timeOut={timeOut}
       />
     );
